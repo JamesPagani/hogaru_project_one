@@ -1,0 +1,125 @@
+<% provide(:title, "Ruby basics") %>
+<h1>Ruby basics</h1>
+
+<h2>String Interpolation</h2>
+<p>The syntax to perform a string interpolation is <code>#{VARIABLE}</code>.</p>
+<p><code>Hello, @{name}, nice to meet you.</code></p>
+
+<hr>
+
+<h2>Arrays</h2>
+<h3>Declaring (creating) an array</h3>
+<p>Creating a new array in Ruby can be done in one of the following ways:</p>
+<code>
+  # Using the literal constructor</br>
+  a = [1, 2, 3, 4, 5]</br>
+  </br>
+  # Using Array.new</br>
+  b = Array.new            # Create a new array</br>
+  c = Array.new(10)        # Create a new array with a capacity of 10 elements</br>
+  d = Array.new(10, false) # Create a new array with a capacity of 10 elements, who ALL default to false</br>
+</code>
+
+<h3>Adding a new element</h3>
+<p>There are three ways to add a new element to an array:</p>
+<code>
+  # Add a new element AT THE END of the array </br>
+  a.push(6)</br>
+  </br>
+  # Add a new element AT THE BEGINNING of the array</br>
+  b.unshift(0)</br>
+  </br>
+  # Add a new element AT A SPECIFIC INDEX in the array</br>
+  c.insert(3, 'NEW', ...) # You can insert more than one element this way
+</code>
+
+<h3>Iterating through an array</h3>
+<p>Arrays posses an <code>each</code> method that can be used to iterate through each element</p>
+<code>
+  a.each {|element| block}
+</code>
+<p>This performs the <code>block</code> of code for each <code>element</code> in the array</p>
+
+<hr>
+
+<h2>Hashes</h2>
+<p>What Ruby calls hashes other languages call dictionaries.</p>
+<h3>Declaring (creating) a hash</h3>
+<p>Creating a hash in Ruby can be done by one of the following methods:</p>
+<code>
+  # Implicitly </br>
+  dict_a = { "One" =&gt; 1, "Two" =&gt; 2 ...} </br>
+  </br>
+  # Implicitly (but with symbols)
+  dict_s = { :sym_a =&gt; 1, :sym_b =&gt; 2 ...} </br>
+  dict_z = { sym_a: 1, sym_b: 2 ...} </br>
+  </br>
+  # Using Hash.new </br>
+  dict_b = Hash.new </br>
+  dict_c = Hash.new(0) # All "non-existing" keys will return this instead of nil
+</code>
+
+<h3>Iterating through a hash</h3>
+<p>Hashes ALSO have an <code>each</code> method, but since you normally have to give a variable name to both the key and the values of the hash, Ruby also has two additional <code>each</code> methods for accessing only the keys or the values:</p>
+<code>
+    # Each key-value pairs </br>
+    dict_a.each {|key, value| BLOCK} </br>
+    </br>
+    # Only keys </br>
+    dict_a.each_key {|key| BLOCK} </br>
+    </br>
+    # Only values </br>
+    dict_a.each_value {|value| BLOCK} </br>
+</code>
+
+<hr>
+
+<h2>Blocks</h2>
+<p>Ruby's way to do anonymous is with <strong>blocks</strong>. Blocks are statements of code enclosed in either the <code>do ... end</code> statements or brackets <code>{}</code>. You can use arguments in blocks by surrounding their name <code>| like_this |</code>.</p>
+<h3>Examples</h3>
+<p>Blocks are commonly used with the <code>each</code> methods of the built-in data structures, like the arrays and hashes described above.</p>
+<code>
+  # do ... end block </br>
+  varr.each do |i| </br>
+  ... </br>
+  end </br>
+  </br>
+  # Brackets block </br>
+  varr.each {|i| ...}
+</code>
+<p>Methods and functions can recieve blocks, and will run them when reaching any <code>yield</code> statement.</p>
+<code>
+  def saying</br>
+  puts "Look, mom..."</br>
+  yield</br>
+  end</br>
+  </br>
+  saying { puts "I'm da best!" }
+</code>
+
+<hr>
+
+<h2>Naming conventions for variables</h2>
+<p>In Ruby, the naming convention for variables is to use <em>snake case</em>, which makes variable names <code>look_like_this</code>. So far, all variables in the examples above use snake case.</p>
+
+<hr>
+
+<h2>attr_accesor, attr_writer, and attr_reader</h2>
+<p><code>attr_accesor</code>, <code>attr_writer</code>, and <code>attr_reader</code> are all shorthand methods used to quickly create getters and setters in your objects.</p>
+<ul>
+  <li><code>attr_accesor</code> creates both a getter and a setter for an attribute.</li>
+  <li><code>attr_writer</code> only creates a setter for an attribute.</li>
+  <li><code>attr_reader</code> only creates a getter for an attribute.</li>
+</ul>
+<code>
+  class Object</br>
+  attr_accesor :name, :age</br>
+  attr_writer :nickname</br>
+  attr_reader :secrets</br>
+  </br>
+  def initialize(name, age, nickname, secrets)</br>
+  ...</br>
+  end</br>
+  ...</br>
+  end
+</code>
