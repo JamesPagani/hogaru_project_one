@@ -1,29 +1,81 @@
 <% provide(:title, "Git basics") %>
 <h1>Git basics</h1>
+<p>Keep in mind that the document assumes you're using git from a command line</p>
 
 <h2>Starting a new repository</h2>
-<p></p>
+<p>To start a new local repository, you'll have to use the <code>git init</code> command. <strong>Use this inside an already existing application (or the folder which contains said app).</strong></p>
+<code>
+  ~$ cd my_app</br>
+  ~/my_app$ git init
+</code>
+
+<hr>
 
 <h2>Creating a new branch</h2>
-<p></p>
+<p>There are two ways to create a new branch:</p>
+<ol>
+  <li>With <code>git branch &lt;new-branch&gt;</code></li>
+  <li>With <code>git checkout -b &lt;new-branch&gt;</code></li>
+</ol>
+<p>You can also switch between them with <code>git checkout &lt;branch-name&gt;</code></p>
+
+<hr>
 
 <h2>Making a new commit, saving all current changes</h2>
-<p></p>
+<p>If you want to commit all of your current changes first use <code>git add -A</code>, then follow it with <code>git commit</code>. It is recommended that when commiting, you use <code>git commit -m "COMMIT MESSAGE"</code> to easily add a message to your commits instead of having to fill it with a command line text editor.</p>
+<code>
+  $ git add -A</br>
+  $ git commit -m "Setting the router configuration"
+</code>
+<hr>
 
 <h2>Pushing your code to a remote repository (GitHub, GitLab, BitBucket, etc.)</h2>
-<p></p>
+<p>To push all changes to your remote repository, use <code>git push &lt;remote-name&gt; &lt;branch&gt;</code>.</p>
+<code>
+  $ git add -A</br>
+  $ git commit -m "SAMPLE TEXT"</br>
+  $ git push -u &lt;remote-url&gt; master
+</code>
+<hr>
 
 <h2>Configuring the "origin" remote repository</h2>
-<p></p>
+<p>To avoid writing the URL of the remote repository, add it with <code>git remote add &lt;name&gt; &lt;remote-url&gt;</code>.</p>
+<code>
+  $ git remote add origin git@github.com:user/repo.git</br>
+  $ git add -A</br>
+  $ git commit -m "SAMPLE TEXT"</br>
+  $ git push -u origin master
+</code>
+
+<hr>
 
 <h2>git reset VS git revert</h2>
-<p></p>
+<p>Both commands are used to correct errors when commiting changes to your repo, but the main difference between the two is <em>the context</em><p>
+<ul>
+  <li><code>git reset</code> is used to undo the actions of <code>git add</code> to avoid commiting a file that should not be on a remote machine/server</li>
+  <li><code>git revert</code> is used to revert the whole repository to a previous commit, should the pushed changes break the application</li>
+</ul>
 
-<h2>git checkout</h2>
-<p></p>
+<hr>
 
-<h2>git log</h2>
-<p></p>
+<h2>Other uses of git checkout</h2>
+<p>Besides using <code>git checkout</code> to switch between branches, it can also be used to create (and switch to) a new branch with <code>git checkout -b BRANCH_NAME</code> .</p>
+
+<hr>
+
+<h2>Checking the commits made</h2>
+<p>If you ever need to check all the commits made in the repository, use <code>git log</code>. This provides the unique ID, author, time, and message of all commits made during the lifetime of the repository.</p>
+
+<hr>
 
 <h2>Commiting specific files</h2>
-<p></p>
+<p>All the instances here of <code>git add</code> used the <code>-A</code> flag, which adds ALL files in the repository and readies them for the next commit. However, <code>git add</code> allows you to push specific files by adding the paths (relative or absolute) of the files you want to commit next. Useful if you want to, say, make two separate commits for each file.</p>
+<code>
+  $ ls </br>
+  file1 file2 </br>
+  $ git add file1 </br>
+  $ git commit -m "Adding file1" </br>
+  $ git add file2 </br>
+  $ git commit -m "Adding file2" </br>
+  ...
+</code>
